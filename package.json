@@ -1,0 +1,27 @@
+{
+  "name": "socifi-rollup-config",
+  "version": "1.0.0",
+  "description": "SOCIFI default rollup config",
+  "main": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/socifi/socifi-rollup-config"
+  },
+  "author": "Michal Ozogán <michal@socifi.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/socifi/socifi-rollup-config",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "rollup": "^0.55.3",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.0.2"
+  },
+  "keywords": [
+    "rollup",
+    "rollup-config",
+    "rollupconfig"
+  ]
+}
