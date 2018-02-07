@@ -1,20 +1,21 @@
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
+const replace = require('rollup-plugin-re');
 const fs = require('fs');
-const { getFiles, onGenerate } = require('./helpers');
+const packageJson = require('./../package.json');
+const { getFiles, onGenerate, getBaseBabelConfig } = require('./helpers');
 
 /**
  * Default configuration for rollup.
  *
- * @param {Object} packageJson - Parsed package.json
+ * @param {Object} packageConfig - Parsed package.json
  * @param {string} baseDir - Base dir of plugin
  * @param {Object} options - Optional parameters
  * @returns {Array<Object>} Rollup settings
  */
-module.exports = (packageJson, baseDir, options = {}) => {
+module.exports = (packageConfig = packageJson, baseDir, options = {}) => {
     return getFiles(baseDir).map((file) => {
         const destinationFile = file.replace('src', 'dist');
-
         return {
             input: file,
             output: [{
@@ -28,24 +29,21 @@ module.exports = (packageJson, baseDir, options = {}) => {
                 propertyReadSideEffects: false,
             },
             plugins: [
-                resolve(),
-                babel({
-                    presets: [
-                        [
-                            'env',
-                            {
-                                modules: false,
-                                targets: {
-                                    browsers: packageJson.browserslist,
-                                },
-                            },
-                        ],
-                        'flow',
-                    ],
-                    plugins: [
-                        'transform-object-rest-spread'
+                replace({
+                    patterns: [
+                        {
+                            test: 'ui-constants\/src',
+                            replace: 'ui-constants/dist',
+                        },
                     ],
                 }),
+                resolve({
+                    modulesOnly: true,
+                    customResolveOptions: {
+                        moduleDirectory: 'src'
+                    },
+                }),
+                babel(getBaseBabelConfig(false, packageConfig)),
                 onGenerate(() => {
                     fs.copyFile(file, `${destinationFile}.flow`, () => {});
                 }),

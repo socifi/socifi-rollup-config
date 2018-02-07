@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const packageJson = require('./../package.json');
 
 /**
  * Get all files in directory, subdirectories include.
@@ -37,4 +38,33 @@ module.exports.onGenerate = (callback) => {
         name: 'on-generate',
         ongenerate: callback,
     }
+};
+
+/**
+ * Get basic configuration for babel.
+ *
+ * @param {false|string} modules - Compile modules, default is false
+ * @param {Object} packageConfig - Package json settings that contains browserlist
+ * @returns {Object} Babel config
+ */
+module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJson) => {
+    return {
+        presets: [
+            [
+                'env',
+                {
+                    modules: modules,
+                    targets: {
+                        browsers: packageConfig.browserslist,
+                    },
+                },
+            ],
+            'flow',
+        ],
+        plugins: [
+            'external-helpers',
+            'transform-object-rest-spread',
+            'transform-class-properties',
+        ],
+    };
 };
