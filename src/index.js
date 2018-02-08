@@ -35,6 +35,10 @@ module.exports = (packageConfig = packageJson, baseDir, options = {}) => {
                             test: 'ui-constants\/src',
                             replace: 'ui-constants/dist',
                         },
+                        {
+                            test: 'ui-models\/src',
+                            replace: 'ui-models/dist',
+                        },
                     ],
                 }),
                 resolve({
