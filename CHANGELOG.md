@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.3.0] 2018-02-13
+### Added
+- Add react env
+
+
 ## [1.2.0] 2018-02-08
 ### Added
 - Add ui-module dist replacer.

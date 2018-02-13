@@ -60,6 +60,7 @@ module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJso
                 },
             ],
             'flow',
+            'react',
         ],
         plugins: [
             'external-helpers',
