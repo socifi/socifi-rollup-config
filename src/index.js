@@ -1,9 +1,65 @@
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
 const replace = require('rollup-plugin-re');
+const commonjs = require('rollup-plugin-commonjs');
 const fs = require('fs');
+const path = require('path');
 const packageJson = require('./../package.json');
 const { getFiles, onGenerate, getBaseBabelConfig } = require('./helpers');
+
+/**
+ * Get basic config for rollup.
+ *
+ * @returns {Object} config
+ */
+function getBasicConfig() {
+    return {
+        treeshake: {
+            propertyReadSideEffects: false,
+        },
+    };
+}
+
+/**
+ * Get config for develop bundle.
+ *
+ * @param {string} dir - Path of project
+ * @param {?Object} options - Optional settings
+ * @returns {Object} Rollup config
+ */
+function getDevConfig(dir, options = {}) {
+    const basicConfig = getBasicConfig();
+    const babelConfig = getBaseBabelConfig(false);
+
+    babelConfig.plugins = [
+        [
+            'flow-runtime',
+            {
+                assert: true,
+                annotate: true,
+            },
+        ],
+        ...babelConfig.plugins.filter(plugin => plugin !== 'external-helpers'),
+    ];
+
+    return {
+        ...basicConfig,
+        input: path.resolve(dir, 'dev', 'index.js'),
+        output: [{
+            file: path.resolve(dir, 'dev', 'index.build.js'),
+            format: 'umd',
+            name: 'dev',
+        }],
+        plugins: [
+            babel(babelConfig),
+            resolve({
+                jsnext: true,
+            }),
+            commonjs({}),
+        ],
+        ...options,
+    };
+}
 
 /**
  * Default configuration for rollup.
@@ -13,10 +69,13 @@ const { getFiles, onGenerate, getBaseBabelConfig } = require('./helpers');
  * @param {Object} options - Optional parameters
  * @returns {Array<Object>} Rollup settings
  */
-module.exports = (packageConfig = packageJson, baseDir, options = {}) => {
+function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
+    const basicConfig = getBasicConfig(packageConfig);
+
     return getFiles(baseDir).map((file) => {
         const destinationFile = file.replace('src', 'dist');
         return {
+            ...basicConfig,
             input: file,
             output: [{
                 file: `${destinationFile.replace('js', 'es.js')}`,
@@ -25,29 +84,30 @@ module.exports = (packageConfig = packageJson, baseDir, options = {}) => {
                 file: destinationFile,
                 format: 'cjs',
             }],
-            treeshake: {
-                propertyReadSideEffects: false,
-            },
             plugins: [
                 replace({
                     patterns: [
                         {
-                            test: 'ui-constants\/src',
+                            test: 'ui-constants/src',
                             replace: 'ui-constants/dist',
                         },
                         {
-                            test: 'ui-models\/src',
+                            test: 'ui-models/src',
                             replace: 'ui-models/dist',
+                        },
+                        {
+                            test: 'ui-admin-api-service/src',
+                            replace: 'ui-admin-api-service/dist',
                         },
                     ],
                 }),
                 resolve({
                     modulesOnly: true,
                     customResolveOptions: {
-                        moduleDirectory: 'src'
+                        moduleDirectory: 'src',
                     },
                 }),
-                babel(getBaseBabelConfig(false, packageConfig)),
+                babel(getBaseBabelConfig(false)),
                 onGenerate(() => {
                     fs.copyFile(file, `${destinationFile}.flow`, () => {});
                 }),
@@ -55,4 +115,10 @@ module.exports = (packageConfig = packageJson, baseDir, options = {}) => {
             ...options,
         };
     });
+}
+
+module.exports = {
+    default: getLibraryConfig,
+    getLibraryConfig,
+    getDevConfig,
 };

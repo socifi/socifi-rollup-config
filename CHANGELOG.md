@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.4.0] 2018-02-15
+### Added
+- Add config for creating developing bundles where is code ready to use in browser.
+- Add Flow runtime for developing builds.
+
+
 ## [1.3.0] 2018-02-13
 ### Added
 - Add react env

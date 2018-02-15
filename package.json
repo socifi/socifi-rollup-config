@@ -1,6 +1,6 @@
 {
   "name": "socifi-rollup-config",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "SOCIFI default rollup config",
   "main": "./src/index.js",
   "repository": {
@@ -13,13 +13,16 @@
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-flow-runtime": "^0.17.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
+    "flow-runtime": "^0.17.0",
     "rollup": "^0.55.3",
     "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-node-resolve": "^3.0.2",
     "rollup-plugin-re": "^1.0.6"
   },
@@ -33,5 +36,8 @@
     "Last 2 versions",
     "not ie <= 10",
     "not ie_mob <= 10"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-config-socifi": "^1.3.0"
+  }
 }

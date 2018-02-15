@@ -37,7 +37,7 @@ module.exports.onGenerate = (callback) => {
     return {
         name: 'on-generate',
         ongenerate: callback,
-    }
+    };
 };
 
 /**
@@ -53,7 +53,7 @@ module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJso
             [
                 'env',
                 {
-                    modules: modules,
+                    modules,
                     targets: {
                         browsers: packageConfig.browserslist,
                     },
