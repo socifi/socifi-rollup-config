@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.5.1] 2018-02-22
+### Fixed
+- Ignore sub .babelrc
+
+
 ## [1.5.0] 2018-02-22
 ### Added
 - Add development resolver for React and React Dates

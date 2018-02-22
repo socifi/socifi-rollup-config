@@ -53,7 +53,7 @@ function getDevConfig(dir, options = {}) {
         }],
         plugins: [
             replaceDist({
-                'process.env.NODE_ENV': JSON.stringify( 'dev' ),
+                'process.env.NODE_ENV': JSON.stringify('dev'),
             }),
             babel(babelConfig),
             resolve({

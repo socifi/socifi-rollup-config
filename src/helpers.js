@@ -49,6 +49,7 @@ module.exports.onGenerate = (callback) => {
  */
 module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJson) => {
     return {
+        babelrc: false,
         presets: [
             [
                 'env',
