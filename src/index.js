@@ -1,6 +1,7 @@
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
 const replace = require('rollup-plugin-re');
+const replaceDist = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
 const fs = require('fs');
 const path = require('path');
@@ -51,11 +52,21 @@ function getDevConfig(dir, options = {}) {
             name: 'dev',
         }],
         plugins: [
+            replaceDist({
+                'process.env.NODE_ENV': JSON.stringify( 'dev' ),
+            }),
             babel(babelConfig),
             resolve({
                 jsnext: true,
             }),
-            commonjs({}),
+            commonjs({
+                namedExports: {
+                    'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement', 'isValidElement'],
+                    'node_modules/react-dom/index.js': ['render', 'createPortal'],
+                    'node_modules/react-intl/lib/index.es.js': ['IntlShape'],
+                    'node_modules/airbnb-prop-types/index.js': ['forbidExtraProps', 'nonNegativeInteger', 'or', 'childrenOfType'],
+                },
+            }),
         ],
         ...options,
     };

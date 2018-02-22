@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.5.0] 2018-02-22
+### Added
+- Add development resolver for React and React Dates
+- Define process.env.NODE_ENV for development builds
+
+
 ## [1.4.0] 2018-02-15
 ### Added
 - Add config for creating developing bundles where is code ready to use in browser.
