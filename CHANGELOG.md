@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.6.0] 2018-03-22
+### Changed
+- Add option to define custom targets for babel.
+
+
 ## [1.5.1] 2018-02-22
 ### Fixed
 - Ignore sub .babelrc

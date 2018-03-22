@@ -30,7 +30,9 @@ function getBasicConfig() {
  */
 function getDevConfig(dir, options = {}) {
     const basicConfig = getBasicConfig();
-    const babelConfig = getBaseBabelConfig(false);
+    const babelConfig = getBaseBabelConfig(false, {
+        browsers: packageJson.browserslist,
+    });
 
     babelConfig.plugins = [
         [
@@ -118,7 +120,9 @@ function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
                         moduleDirectory: 'src',
                     },
                 }),
-                babel(getBaseBabelConfig(false)),
+                babel(getBaseBabelConfig(false, {
+                    browsers: packageConfig.browserslist,
+                })),
                 onGenerate(() => {
                     fs.copyFile(file, `${destinationFile}.flow`, () => {});
                 }),

@@ -44,10 +44,10 @@ module.exports.onGenerate = (callback) => {
  * Get basic configuration for babel.
  *
  * @param {false|string} modules - Compile modules, default is false
- * @param {Object} packageConfig - Package json settings that contains browserlist
+ * @param {Object} targets - Target for babel
  * @returns {Object} Babel config
  */
-module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJson) => {
+module.exports.getBaseBabelConfig = (modules = false, targets) => {
     return {
         babelrc: false,
         presets: [
@@ -55,9 +55,7 @@ module.exports.getBaseBabelConfig = (modules = false, packageConfig = packageJso
                 'env',
                 {
                     modules,
-                    targets: {
-                        browsers: packageConfig.browserslist,
-                    },
+                    targets,
                 },
             ],
             'flow',
