@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const packageJson = require('./../package.json');
 
 /**
  * Get all files in directory, subdirectories include.

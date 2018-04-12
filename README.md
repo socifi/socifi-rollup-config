@@ -1,5 +1,7 @@
 # SOCIFI Default Rollup Configuration
 
+[![npm version](https://badge.fury.io/js/socifi-rollup-config.svg)](https://badge.fury.io/js/socifi-rollup-config)
+
 This is default configuration for rollup that compile javascript libraries.
 
 ## What is included

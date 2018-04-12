@@ -17,6 +17,7 @@ function getBasicConfig() {
     return {
         treeshake: {
             propertyReadSideEffects: false,
+            pureExternalModules: true,
         },
     };
 }
@@ -87,16 +88,25 @@ function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
 
     return getFiles(baseDir).map((file) => {
         const destinationFile = file.replace('src', 'dist');
+        const fileName = path.parse(file).base;
+        const isMainIndex = path.resolve(file) === path.resolve(baseDir, fileName) && fileName === 'index.js';
         return {
             ...basicConfig,
             input: file,
-            output: [{
-                file: `${destinationFile.replace('js', 'es.js')}`,
-                format: 'es',
-            }, {
-                file: destinationFile,
-                format: 'cjs',
-            }],
+            output: [
+                {
+                    file: destinationFile,
+                    format: 'cjs',
+                    freeze: false,
+                },
+                ...(isMainIndex ? [
+                    {
+                        file: `${destinationFile.replace('js', 'es.js')}`,
+                        format: 'es',
+                        freeze: false,
+                    },
+                ] : []),
+            ],
             plugins: [
                 replace({
                     patterns: [
