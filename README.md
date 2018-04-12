@@ -1,6 +1,6 @@
 # SOCIFI Default Rollup Configuration
 
-[![npm version](https://badge.fury.io/js/socifi-rollup-config.svg)](https://badge.fury.io/js/socifi-rollup-config)
+[![npm version](https://badge.fury.io/js/%40socifi%2Frollup-config.svg)](https://badge.fury.io/js/%40socifi%2Frollup-config)
 
 This is default configuration for rollup that compile javascript libraries.
 
@@ -17,7 +17,7 @@ To the destination folder are copied .js.flow so the library can be use with Flo
 First, install this package:
 
 ```nodemon
-npm install socifi-rollup-config --save-dev
+npm install @socifi/rollup-config --save-dev
 ```
 
 Then create your rollup.config.js file:

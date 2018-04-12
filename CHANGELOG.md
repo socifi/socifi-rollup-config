@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.7.0] 2018-04-12
+### Changed
+- Rename npm package to @socifi/rollup-config
+
+
 ## [1.6.0] 2018-03-22
 ### Changed
 - Add option to define custom targets for babel.

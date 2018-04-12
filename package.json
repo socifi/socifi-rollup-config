@@ -1,6 +1,6 @@
 {
-  "name": "socifi-rollup-config",
-  "version": "1.6.1",
+  "name": "@socifi/rollup-config",
+  "version": "1.7.0",
   "description": "SOCIFI default rollup config",
   "main": "./src/index.js",
   "repository": {
