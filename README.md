@@ -1,6 +1,7 @@
 # SOCIFI Default Rollup Configuration
 
 [![npm version](https://badge.fury.io/js/%40socifi%2Frollup-config.svg)](https://badge.fury.io/js/%40socifi%2Frollup-config)
+[![CircleCI](https://circleci.com/gh/socifi/rollup-config/tree/master.svg?style=shield)](https://circleci.com/gh/socifi/rollup-config/tree/master)
 
 This is default configuration for rollup that compile javascript libraries.
 
