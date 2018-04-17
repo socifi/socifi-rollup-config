@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.8.0] 2018-04-17
+### Added
+- Add testing on circleci.
+
+
 ## [1.7.0] 2018-04-12
 ### Changed
 - Rename npm package to @socifi/rollup-config

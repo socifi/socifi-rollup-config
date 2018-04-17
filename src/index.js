@@ -85,6 +85,7 @@ function getDevConfig(dir, options = {}) {
  */
 function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
     const basicConfig = getBasicConfig(packageConfig);
+    const libraryToReplace = ['ui-constants', 'ui-models', 'ui-admin-api-service'];
 
     return getFiles(baseDir).map((file) => {
         const destinationFile = file.replace('src', 'dist');
@@ -109,20 +110,12 @@ function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
             ],
             plugins: [
                 replace({
-                    patterns: [
-                        {
-                            test: 'ui-constants/src',
-                            replace: 'ui-constants/dist',
-                        },
-                        {
-                            test: 'ui-models/src',
-                            replace: 'ui-models/dist',
-                        },
-                        {
-                            test: 'ui-admin-api-service/src',
-                            replace: 'ui-admin-api-service/dist',
-                        },
-                    ],
+                    patterns: libraryToReplace.map((library) => {
+                        return {
+                            test: `${library}/src`,
+                            replace: `${library}/dist`,
+                        };
+                    }),
                 }),
                 resolve({
                     modulesOnly: true,
