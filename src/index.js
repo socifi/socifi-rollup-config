@@ -122,6 +122,7 @@ function getLibraryConfig(packageConfig = packageJson, baseDir, options = {}) {
                     customResolveOptions: {
                         moduleDirectory: 'src',
                     },
+                    extensions: ['.js', '.jsx'],
                 }),
                 babel(getBaseBabelConfig(false, {
                     browsers: packageConfig.browserslist,
