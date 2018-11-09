@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.0.0] 2018-11-09
+### Fixed
+- Link to issue BREAKING
+
+### Other
+- Issue/[DAS-45](https://socifi.atlassian.net/browse/DAS-45) Add support for typescript
+
 ## [1.10.0] 2018-04-26
 ### Added
 - [RND-12](https://socifi.atlassian.net/browse/RND-12) Rollup config: compile jsx Files.
