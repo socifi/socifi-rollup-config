@@ -3,7 +3,8 @@ const path = require('path');
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
 const serve = require('rollup-plugin-serve');
-const getBabelConfig = require('@socifi/babel-config');
+const replaceDist = require('rollup-plugin-replace');
+const commonjs = require('rollup-plugin-commonjs');
 
 function getFiles(baseDir) {
     // get all items from base directory
@@ -49,7 +50,9 @@ function getFileConfig(file, settings = {}) {
             ] : []),
         ],
         plugins: [
-            babel(getBabelConfig(undefined, false)),
+            babel({
+                exclude: 'node_modules/**',
+            }),
             resolve({
                 modulesOnly: true,
                 customResolveOptions: {
@@ -68,17 +71,51 @@ function getDirectoryConfig(dir, settings) {
 
 function getDevelopConfig(file) {
     const base = getFileConfig(file);
-    const destinationFile = file.replace(/dev$/, 'build').replace(/\.(tsx|ts)$/, '.js');
+    const destinationFile = file.replace(/dev/, '/build/').replace(/\.(tsx|ts)$/, '.js');
 
     fs.copyFileSync(
         path.resolve(__dirname, '..', 'assets', 'index.html'),
-        path.resolve(path.parse(destinationFile).dir, 'index.html')
+        path.resolve(path.parse(destinationFile).dir, 'index.html'),
     );
 
     return {
         ...base,
         plugins: [
-            ...base.plugins,
+            replaceDist({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
+            commonjs({
+                include: 'node_modules/**',
+                namedExports: {
+                    'node_modules/react/index.js': [
+                        'Children',
+                        'Component',
+                        'PureComponent',
+                        'PropTypes',
+                        'createElement',
+                        'Fragment',
+                        'cloneElement',
+                        'StrictMode',
+                        'createFactory',
+                        'createRef',
+                        'createContext',
+                        'isValidElement',
+                        'isValidElementType',
+                        'forwardRef',
+                    ],
+                    'node_modules/react-dom/index.js': [
+                        'render',
+                        'hydrate',
+                    ],
+                },
+            }),
+            resolve({
+                browser: true,
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            }),
+            babel({
+                exclude: 'node_modules/**',
+            }),
             serve({
                 contentBase: 'build',
                 port: 8080,

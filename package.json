@@ -20,20 +20,20 @@
   ],
   "scripts": {
     "lint": "eslint ./src/*.js",
-    "release": "semantic-release",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "release": "semantic-release"
   },
   "dependencies": {
-    "@socifi/babel-config": "^0.2.0",
-    "rollup": "^0.66.2",
+    "rollup": "^0.67.0",
     "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-serve": "^0.6.0"
   },
   "devDependencies": {
-    "@socifi/eslint-config": "^1.10.0",
-    "@socifi/commitlint-config": "^0.8.0",
-    "@socifi/semantic-release-config": "^0.8.1",
-    "husky": "^1.0.1"
+    "@socifi/eslint-config": "^2.0.1",
+    "@socifi/commitlint-config": "^1.0.0",
+    "@socifi/semantic-release-config": "^1.0.1",
+    "husky": "^1.1.3"
   }
 }
