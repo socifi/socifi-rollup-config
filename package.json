@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/socifi/rollup-config"
+    "url": "https://github.com/socifi/rollup-config.git"
   },
   "bugs": {
     "url": "https://github.com/socifi/rollup-config/issues"
