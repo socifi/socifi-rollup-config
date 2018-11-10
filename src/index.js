@@ -6,6 +6,8 @@ const serve = require('rollup-plugin-serve');
 const replaceDist = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
 
+const supportedExtensions = ['.js', '.jsx', '.ts', '.tsx'];
+
 function getFiles(baseDir) {
     // get all items from base directory
     const items = fs.readdirSync(baseDir);
@@ -41,24 +43,23 @@ function getFileConfig(file, settings = {}) {
                 format: 'cjs',
                 freeze: false,
             },
-            ...(fileName.indexOf('index') >= 0 ? [
-                {
-                    file: `${destinationFile.replace(/\.(tsx|ts)$/, '.es.js')}`,
-                    format: 'es',
-                    freeze: false,
-                },
-            ] : []),
+            {
+                file: destinationFile.replace(/\.(tsx|ts)$/, '.esm.js'),
+                format: 'es',
+                freeze: false,
+            },
         ],
         plugins: [
             babel({
                 exclude: 'node_modules/**',
+                extensions: supportedExtensions,
             }),
             resolve({
                 modulesOnly: true,
                 customResolveOptions: {
                     moduleDirectory: 'src',
                 },
-                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                extensions: supportedExtensions,
             }),
         ],
         ...settings,
@@ -111,10 +112,11 @@ function getDevelopConfig(file) {
             }),
             resolve({
                 browser: true,
-                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                extensions: supportedExtensions,
             }),
             babel({
                 exclude: 'node_modules/**',
+                extensions: supportedExtensions,
             }),
             serve({
                 contentBase: 'build',
