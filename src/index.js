@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 const fs = require('fs');
 const path = require('path');
 const babel = require('rollup-plugin-babel');
@@ -5,6 +6,7 @@ const resolve = require('rollup-plugin-node-resolve');
 const serve = require('rollup-plugin-serve');
 const replaceDist = require('rollup-plugin-replace');
 const commonjs = require('rollup-plugin-commonjs');
+const json = require('rollup-plugin-json');
 
 const supportedExtensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -61,6 +63,7 @@ function getFileConfig(file, settings = {}) {
                 },
                 extensions: supportedExtensions,
             }),
+            json(),
         ],
         ...settings,
     };
