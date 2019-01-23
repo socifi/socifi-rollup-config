@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.1.0] 2019-01-23
+### Added
+- Support for json files
+
 ## [2.0.1] 2018-11-10
 ### Fixed
 - List of extensions that are supported.
