@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.2.0] 2019-10-21
+### Added
+- Default location for config.
+
 ## [2.1.0] 2019-01-23
 ### Added
 - Support for json files
