@@ -54,6 +54,7 @@ function getFileConfig(file, settings = {}) {
             babel({
                 exclude: 'node_modules/**',
                 extensions: supportedExtensions,
+                runtimeHelpers: true,
             }),
             resolve({
                 modulesOnly: true,
