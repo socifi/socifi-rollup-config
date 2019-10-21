@@ -31,7 +31,6 @@ function getFiles(baseDir) {
 
 function getFileConfig(file, settings = {}) {
     const destinationFile = file.replace('src', 'dist');
-    const fileName = path.parse(file).base;
 
     return {
         treeshake: {
@@ -69,8 +68,8 @@ function getFileConfig(file, settings = {}) {
     };
 }
 
-function getDirectoryConfig(dir, settings) {
-    return getFiles(dir).map(file => getFileConfig(file, settings));
+function getDirectoryConfig(dir = './src', settings) {
+    return getFiles(dir).map((file) => getFileConfig(file, settings));
 }
 
 function getDevelopConfig(file) {
