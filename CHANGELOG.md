@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.2.1] 2019-10-21
+### Fixed
+- Missing runtine helper settings in babel.
+
 ## [2.2.0] 2019-10-21
 ### Added
 - Default location for config.
