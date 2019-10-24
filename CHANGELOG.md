@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 
 
+## [2.2.2] 2019-10-24
+### Fixed
+- Include babel runtime directly in source code instead of creating a dependency.
+
 ## [2.2.1] 2019-10-21
 ### Fixed
 - Missing runtine helper settings in babel.
