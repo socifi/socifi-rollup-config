@@ -55,6 +55,7 @@ function getFileConfig(file, settings = {}) {
                 exclude: 'node_modules/**',
                 extensions: supportedExtensions,
                 runtimeHelpers: true,
+                externalHelpers: true,
             }),
             resolve({
                 modulesOnly: true,
